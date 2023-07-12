@@ -1,5 +1,5 @@
 {
-  "name": "Node-Js-Assignment",
+  "name": "Node-Js-Assignment-Calculate-SKU-Stock-level",
   "version": "1.0.0",
   "type": "module",
   "description": "",
@@ -11,6 +11,7 @@
     "typescript": "^5.1.6"
   },
   "scripts": {
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "start":"node index.js"
   }
 }
