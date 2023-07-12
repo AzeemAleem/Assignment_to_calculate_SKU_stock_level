@@ -18,6 +18,9 @@ async function getCurrentStockLevel(
       (transaction) => transaction.sku === sku
     );
 
+    if (relevantTransactions.length === 0) {
+      throw new Error(`SKU '${sku}' does not exist.`);
+    }
     // Calculating the total quantity by iterating over relevant transactions
     const totalQuantity = relevantTransactions.reduce((acc, transaction) => {
       // If the transaction type is "order", we are adding the quantity to the accumulator
@@ -25,6 +28,7 @@ async function getCurrentStockLevel(
       return transaction.type === "order"
         ? acc + transaction.qty
         : acc - transaction.qty;
+      
     }, startingStock);
 
     // Checking if the total quantity is negative
@@ -35,9 +39,7 @@ async function getCurrentStockLevel(
     // Final result
     return { sku, qty: totalQuantity };
   } catch (error: any) {
-    throw new Error(
-      `Failed to calculate stock level for SKU '${sku}'& ${error.message}`
-    );
+    throw new Error(`Failed to calculate stock level for SKU '${sku}'.`);
   }
 }
 
